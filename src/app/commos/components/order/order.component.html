@@ -1,0 +1,20 @@
+
+  <th [class.active]="filterService.order === 'name'" (click)="setOrder('name')">name
+    <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+  </th>
+  <th *ngIf="showImage">image </th>
+  <th [class.active]="filterService.order === 'details'" (click)="setOrder('details')">details
+    <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+  </th>
+  <th [class.active]="filterService.order === 'countryManufacturing'" (click)="setOrder('countryManufacturing')">countryManufacturing
+    <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+  </th>
+  <th [class.active]="filterService.order === 'Price'" (click)="setOrder('Price')">Price
+    <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+  </th>
+  <th [class.active]="filterService.order === 'available'" (click)="setOrder('available')">available
+    <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+  </th>
+  <th [class.active]="filterService.order === 'sold'" (click)="setOrder('sold')">sold
+    <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+  </th>

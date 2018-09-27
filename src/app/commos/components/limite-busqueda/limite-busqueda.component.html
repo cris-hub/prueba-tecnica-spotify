@@ -1,0 +1,27 @@
+<div title="limite busqueda">
+  limite consulta
+  <div class="btn-group margin-13 flex-center" role="group" data-toggle="dropdown" uib-popover="Paginación" popover-placement="right">
+    <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+      <i class="fa fa-list-ul"  title="Paginación"></i>
+    </a>
+    <ul class="dropdown-menu tamano_dropdawn_200px" style="left:inherit">
+      <li class="records-page-contactos" data-page="5">
+        <a (click)="limiteConsulta(5)">5 Registros</a>
+      </li>
+      <li class="records-page-contactos" data-page="10">
+        <a (click)="limiteConsulta(10)">10 Registros</a>
+      </li>
+      <li class="records-page-contactos" data-page="20">
+        <a (click)="limiteConsulta(20)">20 Registros</a>
+      </li>
+      <li class="records-page-contactos" data-page="30">
+        <a (click)="limiteConsulta(30)">30 Registros</a>
+      </li>
+      <li class="records-page-contactos" data-page="50">
+        <a (click)="limiteConsulta(50)">50 Registros</a>
+      </li>
+     
+    </ul>
+  </div>
+</div>
