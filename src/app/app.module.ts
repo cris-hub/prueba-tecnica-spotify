@@ -19,13 +19,19 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
 import { FilterService } from './services/filter.service';
 import { OrderComponent } from './commos/components/order/order.component';
+import { LoginReolver } from './resolvers/loging-resolver';
+import { SpotifyComponent } from './components/spotify/spotify.component';
 
 @NgModule({
   declarations: [
     // root
     AppComponent,
     // shared comps
-    AlbumListItemComponent, FormFilterComponent, AlbumListComponent, TrackListComponent,
+    AlbumListItemComponent,
+    FormFilterComponent,
+    AlbumListComponent,
+    TrackListComponent,
+    SpotifyComponent,
     // pipes
     SecsToTimePipe,
     PaginationComponent,
@@ -38,9 +44,9 @@ import { OrderComponent } from './commos/components/order/order.component';
     HttpModule,
     AppRoutingModule,
     NgxPaginationModule,
-    
+
   ],
-  providers: [SpotifyAudioService, SpotifyAPIService,FilterService],
+  providers: [SpotifyAudioService, SpotifyAPIService, FilterService, LoginReolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
