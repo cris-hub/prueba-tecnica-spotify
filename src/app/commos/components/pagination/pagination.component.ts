@@ -16,6 +16,7 @@ export class PaginationComponent implements OnInit {
   }
 
   cambioPagina(page: any) {
+    console.log(page)
     this.filterService.paginacion.PaginaActual = page;
   }
 }

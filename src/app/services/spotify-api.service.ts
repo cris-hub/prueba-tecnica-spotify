@@ -43,7 +43,14 @@ debugger
 
   getListofNewReleases(){
     const options = this.getOptions();
-    return this.http.get(`https://api.spotify.com/v1/browse/new-releases?limit=${this.filterService.paginacion.CantidadRegistros}`, options)
+    console.log(this.filterService.paginacion)
+    return this.http.get(`
+    https://api.spotify.com/v1/browse/new-releases?limit=${
+      this.filterService.paginacion.CantidadRegistros
+    }&offset=${
+      this.filterService.paginacion.PaginaActual*this.filterService.paginacion.CantidadRegistros
+    }`
+    , options)
       .map(res => res.json())
       .publishLast()
       .refCount()

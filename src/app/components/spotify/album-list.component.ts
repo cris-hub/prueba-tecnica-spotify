@@ -28,7 +28,7 @@ import { PaginacionModel } from '../../modelo/PaginacionModel';
       </div>
       </table>
 
-  <app-pagination></app-pagination>
+  <app-pagination  (click)="paginacion.emit(true)" ></app-pagination>
   `,
   styleUrls: ['./album-list.component.css']
 })
