@@ -15,27 +15,31 @@ import { ActivatedRoute } from '@angular/router';
         target="_blank">
           {{album.artists[0].name}}
       </a>
+    
+      <div class="tracks-list" *ngIf="tracks">
       
-      <div class="album-name"  *ngIf="album" >{{album.name}}</div>
-            
-      <div class="tracks-list" *ngIf="album">
-      <div class="tracks-list" *ngIf="album.tracks">
-          
-          <div class="track" *ngFor="let t of album.tracks.items; let i = index"
-            (click)="trackClick.emit(t)"
+      <div class="track" *ngFor="let tr of tracks; let i = index">
+         
+          <div class="track" *ngFor="let t of tr.items; let i = index"
+            (click)="playTrack(t)"
             [style.color]="t.id === track?.id ? 'orange' : null"
             >
-            {{i+1}}. {{t.name}} - {{t.duration_ms | secsToTime: true}} 
-          </div>
+            <img 
+            [src]="tr.album.images[2].url" 
+            class="cover"
+            >
+            {{t.name}} - duració{{t.duration_ms | secsToTime: true}} - album :{{tr.album.name}}
           </div>
 
-      </div>
+          </div>
+       </div>
+
         
        <i class="remove circle icon close-button" routerLink="/lanzamiento"
        ></i>
     </div>
   `,
-  styleUrls: ['./track-list.component.css']
+  styleUrls: ['./artista.component.css']
 
 })
 export class ArtistaComponent implements OnInit {
@@ -45,7 +49,8 @@ export class ArtistaComponent implements OnInit {
   artist = '';
   albums: Album[];
   album: Album = null;
-  track: Track =null;
+  track: Track = null;
+  public tracks: Track[] = [];
   spotifyAudioSubscription: Subscription;
 
   constructor(
@@ -56,30 +61,50 @@ export class ArtistaComponent implements OnInit {
     private activedRoute: ActivatedRoute,
 
   ) {
-  
+
   }
 
   ngOnInit(): void {
     this.route.data.subscribe(response => {
       debugger
-      if (Object.getOwnPropertyNames(response).length > 0){
+      if (Object.getOwnPropertyNames(response).length > 0) {
         this.findArstist(this.obtenerParametrosRuta().get('artista'))
       }
     })
     this.spotifyAudioSubscription = this.spotifyAudio.ended$.subscribe(() => this.album = null)
   }
 
-  obtenerParametrosRuta() : Map<string,string> {
+  obtenerParametrosRuta(): Map<string, string> {
     let parametrosUlrMap: Map<string, string> = new Map<string, string>();
     parametrosUlrMap.set('artista', this.activedRoute.snapshot.paramMap.get('id'));
     return parametrosUlrMap;
-}
+  }
+
+
+  searchAlbums(author: string) {
+    this.spotifyAPI.searchAlbums(author)
+      .subscribe(res => this.albums = res.albums.items)
+  }
 
   findArstist(id: string) {
     this.spotifyAPI.findArstist(id)
-      .subscribe(res =>  {
-        debugger
-        this.album =  res.items[0]
-        this.albums = res.items })
+      .subscribe(res => {
+        this.album = res.items[0]
+        this.albums = res.items
+        this.albums.forEach(alb => {
+          this.spotifyAPI.findAlbum(alb.id).subscribe(album => {
+            console.log(album)
+            album.album = alb;
+            this.tracks.push(album)
+          })
+        })
+
+      })
+  }
+
+  playTrack(track: Track) {
+    if (this.track && this.track.id === track.id) { return; }
+    this.track = track;
+    this.spotifyAudio.playAudioTrack(track.preview_url)
   }
 }

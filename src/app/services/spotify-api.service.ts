@@ -41,6 +41,14 @@ debugger
       .refCount()
   }
 
+  findAlbum(id: string) {
+    const options = this.getOptions();
+    return this.http.get(`https://api.spotify.com/v1/albums/${id}/tracks`, options)
+      .map(res => res.json())
+      .publishLast()
+      .refCount()
+  }
+
   findArstist(id: string) {
     const options = this.getOptions();
     return this.http.get(`https://api.spotify.com/v1/artists/${id}/albums`, options)
@@ -75,7 +83,6 @@ debugger
   private getOptions() {
     console.log(this.accessToken);
     console.log(this.tokenType);
-debugger
     let header = new Headers();
     header.append('Authorization', this.tokenType + ' ' + this.accessToken);
     let options = new RequestOptions({ headers: header });
