@@ -8,5 +8,16 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"
+  },
+  "/*/***": {
+    "target": {
+      "host": "accounts.spotify.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
   }
+
 }

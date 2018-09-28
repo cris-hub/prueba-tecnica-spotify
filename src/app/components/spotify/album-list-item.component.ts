@@ -9,8 +9,10 @@ import { Component, Input, HostBinding } from '@angular/core';
         class="cover"
         [ngClass]="{playing: active}"
         >
-        <label>Artista:</label>
-        <p>{{album.artists[0].name}}</p>
+        <label>Artistas:</label>
+        <ul *ngFor="let artista of album.artists" >
+        <li> <button class="ui primary button" [routerLink]="'/artista/'+artista.id" >{{artista.name}}</button> </li>
+        </ul>
         <label>lanzamiento:</label>
         <p> {{album.release_date}}</p>
         <label>{{album.album_type =='album' ? 'album:':'nombre :'  }}</label>

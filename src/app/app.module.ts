@@ -21,6 +21,7 @@ import { FilterService } from './services/filter.service';
 import { OrderComponent } from './commos/components/order/order.component';
 import { LoginReolver } from './resolvers/loging-resolver';
 import { SpotifyComponent } from './components/spotify/spotify.component';
+import { ArtistaComponent } from './components/spotify/artista.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SpotifyComponent } from './components/spotify/spotify.component';
     AlbumListComponent,
     TrackListComponent,
     SpotifyComponent,
+    ArtistaComponent,
     // pipes
     SecsToTimePipe,
     PaginationComponent,

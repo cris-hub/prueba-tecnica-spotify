@@ -35,9 +35,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./album-list.component.css']
 })
 export class SpotifyComponent implements OnInit,OnDestroy {
-  ngOnInit(): void {
- 
-  }
   artist = '';
   albums: Album[];
   album: Album;
@@ -51,6 +48,10 @@ export class SpotifyComponent implements OnInit,OnDestroy {
     private route: ActivatedRoute,
 
   ) {
+  
+  }
+
+  ngOnInit(): void {
     this.route.data.subscribe(response => {
       debugger
       if (Object.getOwnPropertyNames(response).length > 0)

@@ -41,6 +41,13 @@ debugger
       .refCount()
   }
 
+  findArstist(id: string) {
+    const options = this.getOptions();
+    return this.http.get(`https://api.spotify.com/v1/artists/${id}/albums`, options)
+      .map(res => res.json())
+      .publishLast()
+      .refCount()
+  }
   getListofNewReleases(){
     const options = this.getOptions();
     console.log(this.filterService.paginacion)
